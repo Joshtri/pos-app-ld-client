@@ -2,10 +2,10 @@ import axios from 'axios';
 import { Parfum } from '../types/parfum';
 import { ApiResponse } from '../types/apiResponse';
 
-const API_URL = 'http://localhost:5000/api/v1/parfum'; // Sesuaikan dengan backend Anda
+const API_URL = `${import.meta.env.VITE_BASE_URL}/api/v1/parfum`; // Sesuaikan dengan backend Anda
 
 // Mendapatkan semua parfum
-// export const getAllParfum = async (): Promise<Parfum[]> => {
+// export const getAllParfum = async (): Promise<Parfum[]> => 
 //   const response = await axios.get<Parfum[]>(API_URL);
 //   return response.data;
 // };
