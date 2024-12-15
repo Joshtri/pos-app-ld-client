@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Parfum } from '../../types/parfum';
+import React, { useState, useEffect } from "react";
+import { Parfum } from "../../types/parfum";
 
 interface ParfumModalFormProps {
-  isOpen: boolean; // Kontrol visibilitas modal
-  onClose: () => void; // Fungsi untuk menutup modal
-  onSubmit: (data: Omit<Parfum, 'id' | 'dibuatPada'>) => void; // Fungsi submit
-  initialData?: Omit<Parfum, 'id' | 'dibuatPada'>; // Data awal untuk form
+  isOpen: boolean;
+  onClose: () => void;
+  onSubmit: (data: Omit<Parfum, "id" | "dibuatPada">) => void;
+  initialData?: Omit<Parfum, "id" | "dibuatPada">;
 }
 
 const ParfumModalForm: React.FC<ParfumModalFormProps> = ({
@@ -14,29 +14,34 @@ const ParfumModalForm: React.FC<ParfumModalFormProps> = ({
   onSubmit,
   initialData,
 }) => {
-  const [nama, setNama] = useState(initialData?.nama || '');
+  const [nama, setNama] = useState(initialData?.nama || "");
 
   useEffect(() => {
-    // Reset nama saat modal dibuka atau data awal berubah
     if (isOpen) {
-      setNama(initialData?.nama || '');
+      setNama(initialData?.nama || ""); // Reset input saat modal dibuka
     }
   }, [isOpen, initialData]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit({ nama });
+
+    if (!nama.trim()) {
+      alert("Nama parfum tidak boleh kosong.");
+      return;
+    }
+
+    onSubmit({ nama }); // Kirim data parfum yang diubah
     onClose(); // Tutup modal setelah submit
   };
 
-  if (!isOpen) return null; // Jangan render modal jika isOpen false
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold">
-            {initialData ? 'Edit Parfum' : 'Tambah Parfum'}
+            {initialData ? "Edit Parfum" : "Tambah Parfum"}
           </h2>
           <button
             onClick={onClose}
