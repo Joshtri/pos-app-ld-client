@@ -41,6 +41,14 @@ const Navbar: React.FC = () => {
               Pengguna
             </Link>
           </li>
+          <li>
+            <Link
+              to="/paket"
+              className="text-white hover:bg-blue-700 px-3 py-2 rounded-lg transition"
+            >
+              Paket
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>
